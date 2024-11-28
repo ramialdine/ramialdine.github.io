@@ -1,39 +1,123 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>HTML basics</title>
-    </head>
-    <body>
-<center> <img src= "mybanner.jpg" <br>
-    
-    <table width="100px">
-        <tbody>
-            <thead>
-                <tr>
-                    <th> <a href="AboutMe.html"><img src="about me page.jpg"> </a> </th>
-            <th> <a href="Javascripts.html"><img src="button java.jpg.jpg"> </a> </th>
-        <th> <a href="index.html"><img src="button home.jpg.jpg"> </a> </th>
-                   <th> <a href="myapps.html"><img src="apps button.jpg"> </a> </th>
-                    <th> <a href = "final.html"> <img src = "Finalbutton.jpg" </a> </th>
-                   
-                </tr>
-                
-                
-                
-            </thead>
-            </tbody>
-    </table>
-   <style>
-                        body {
-  background-color: red;
-}
-                        </style>
-                        
-    <h2> Hello, and welcome to my page!</h2>
-    <p> This website will be a journey through out my first experience in coding! I will be using github servers in order to create a website for my csc106 class at 
-        the university of Rhode Island. I am using HTML to build the skeleton of my website and java to build the interactivity. 
-        <br>
-<center> Back to <a href="index.html"> home page </a>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Basics</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #ff6f61, #ffa500);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        header img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        nav img {
+            border: 3px solid white;
+            border-radius: 10px;
+            width: 100px;
+            height: auto;
+        }
+
+        nav a:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.8);
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="mybanner.jpg" alt="Website Banner">
+    </header>
+
+    <nav>
+        <a href="AboutMe.html"><img src="about_me_page.jpg" alt="About Me"></a>
+        <a href="Javascripts.html"><img src="button_java.jpg" alt="JavaScript"></a>
+        <a href="index.html"><img src="button_home.jpg" alt="Home"></a>
+        <a href="myapps.html"><img src="apps_button.jpg" alt="My Apps"></a>
+        <a href="final.html"><img src="Finalbutton.jpg" alt="Final"></a>
+    </nav>
+
+    <main>
+        <h2>Welcome to My Page!</h2>
+        <p>
+            This website is a journey through my first experience in coding! I’m using GitHub servers 
+            to create this website for my CSC106 class at the University of Rhode Island. Here, I’m exploring 
+            HTML to build the skeleton of my website and JavaScript for interactivity.
+        </p>
+        <p>
+            <a href="index.html">Back to home page</a>
+        </p>
+    </main>
+
+    <footer>
+        &copy; 2024 My First Coding Journey | All Rights Reserved
+    </footer>
+</body>
 </html>
