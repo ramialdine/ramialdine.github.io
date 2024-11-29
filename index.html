@@ -144,23 +144,48 @@
             margin: 10px 0;
         }
 
-        .toggle-button {
+        .pull-tab {
             position: absolute;
-            top: 20px;
+            top: 50%;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 0, 0.8);
+            border-radius: 50%;
             cursor: pointer;
-            color: white;
-            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+            z-index: 4;
+            transform: translateY(-50%);
         }
 
-        .toggle-button.left {
-            left: 10px;
+        .pull-tab.left {
+            left: 0;
         }
 
-        .toggle-button.right {
-            right: 10px;
+        .pull-tab.right {
+            right: 0;
+        }
+
+        .pull-tab:hover {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 255, 0, 1);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="particles-js"></div>
     <div class="background">
@@ -176,42 +201,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Left Sidebar -->
-    <div class="sidebar left" id="leftSidebar">
-        <h3>Skills</h3>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-        </ul>
-    </div>
-
-    <!-- Right Sidebar -->
-    <div class="sidebar right" id="rightSidebar">
-        <h3>About Me</h3>
-        <ul>
-            <li>Passionate Web Developer</li>
-            <li>Enjoys learning new frameworks</li>
-            <li>Exploring UX Design</li>
-        </ul>
-    </div>
-
-    <div class="toggle-button left" onclick="toggleSidebar('leftSidebar')">☰</div>
-    <div class="toggle-button right" onclick="toggleSidebar('rightSidebar')">☰</div>
-
-    <script>
-        // Sidebar Toggle Function
-        function toggleSidebar(side) {
-            const sidebar = document.getElementById(side);
-            sidebar.classList.toggle('open');
-        }
-
-        // Particles.js config
-        particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
-            console.log('Particles loaded');
-        });
-    </script>
+    <div class="pull-tab left"></div>
+    <div class="pull-tab right"></div>
 </body>
 </html>
