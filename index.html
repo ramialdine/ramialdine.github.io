@@ -32,17 +32,18 @@
             text-align: center;
             color: white;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            position: relative; /* Allows particles and tabs to layer correctly */
         }
 
         #main-header {
-            position: relative; /* Allows independent movement */
-            margin-top: -120px; /* Moves the name higher */
             font-size: 3.5rem;
             color: white;
             background: rgba(255, 0, 0, 0.7);
             padding: 10px 20px;
             border-radius: 10px;
             transition: background 0.3s, transform 0.3s;
+            position: relative;
+            margin-top: -120px; /* Moves just the header upwards */
         }
 
         h2 {
@@ -88,41 +89,7 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
         }
 
-        .styled-button:focus {
-            outline: none;
-        }
-
-        /* Keyframe Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        /* Style for Sidebar Tabs */
+        /* Sidebar Tabs */
         .left-tab, .right-tab {
             position: fixed;
             top: 50%;
@@ -130,7 +97,7 @@
             width: 40px;
             height: 120px;
             background: red;
-            border-radius: 5px 0 0 5px;
+            border-radius: 5px;
             cursor: pointer;
             animation: pulse 2s infinite;
             display: flex;
@@ -152,24 +119,99 @@
                 box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
             }
         }
+
+        /* Particle Effects Styling */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Sit behind the UI but above the background */
+        }
     </style>
 </head>
 <body>
     <div class="background">
         <h1 id="main-header">Rami Jamal Aldine</h1>
         <h2>Programming Portfolio</h2>
-        <p>
-            This website showcases my journey into coding, starting with HTML and JavaScript. 
-            From creating basic structures to interactive designs, I’ve built this site to share my progress 
-            and inspire others to explore web development.
-        </p>
-        <!-- Button Navigation -->
+        <p>This website showcases my journey into coding, starting with HTML and JavaScript.</p>
+
         <div class="button-container">
             <button class="styled-button" onclick="window.location.href='AboutMe.html'">About Me</button>
             <button class="styled-button" onclick="window.location.href='Javascripts.html'">JavaScript</button>
-            <button class="styled-button" onclick="window.location.href='myapps.html'">My Apps</button>
-            <button class="styled-button" onclick="window.location.href='final.html'">Final Project</button>
         </div>
     </div>
+
+    <div class="left-tab" onclick="toggleSidebar('left')">❮</div>
+    <div class="right-tab" onclick="toggleSidebar('right')">❯</div>
+
+    <canvas class="particles"></canvas> <!-- For particle effects -->
+
+    <script>
+        // Sidebar Toggle Logic
+        function toggleSidebar(side) {
+            alert(`Toggle Sidebar for ${side} tab`); // Replace this with transition logic
+        }
+
+        // Particle Animation Logic
+        const canvas = document.querySelector(".particles");
+        const ctx = canvas.getContext("2d");
+
+        let particlesArray = [];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.color = Math.random() < 0.5 ? "red" : "white";
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Respawn particles
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < 100; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach((particle) => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        initParticles();
+        animateParticles();
+    </script>
 </body>
 </html>
