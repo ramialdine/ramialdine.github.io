@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rami Jamal Aldine</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <style>
         /* General Reset */
         * {
@@ -18,6 +17,8 @@
             font-family: 'Poppins', sans-serif;
             color: white;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         /* Full-page background */
@@ -31,49 +32,44 @@
             text-align: center;
             color: white;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-            position: relative;
         }
 
-        #particles-js {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-        }
-
-        h1 {
-            margin-top: -120px; /* Move the name higher */
+        #main-header {
+            position: relative; /* Allows independent movement */
+            margin-top: -120px; /* Moves the name higher */
             font-size: 3.5rem;
-            background: rgba(255, 0, 0, 0.7); /* Cool default background */
+            color: white;
+            background: rgba(255, 0, 0, 0.7);
             padding: 10px 20px;
             border-radius: 10px;
             transition: background 0.3s, transform 0.3s;
         }
 
-        h1:hover {
-            background: rgba(255, 0, 0, 1); /* Brighter red on hover */
-            transform: scale(1.05);
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 2s ease-out;
         }
 
-        h2, p {
-            animation: fadeIn 2s ease-in-out;
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            animation: fadeInUp 2s ease-out;
         }
 
+        /* Button Container */
         .button-container {
             display: flex;
             gap: 20px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 30px;
             animation: slideIn 2s ease-out;
         }
 
+        /* Button Styling */
         .styled-button {
             background: rgba(255, 255, 255, 0.4);
             color: white;
@@ -86,135 +82,94 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
-        .sidebar {
+        .styled-button:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+        }
+
+        .styled-button:focus {
+            outline: none;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Style for Sidebar Tabs */
+        .left-tab, .right-tab {
             position: fixed;
-            top: 0;
-            bottom: 0;
-            width: 300px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            overflow-y: auto;
-            transition: transform 0.5s ease-in-out;
-            z-index: 3;
-        }
-
-        .sidebar.left {
-            left: -300px;
-        }
-
-        .sidebar.right {
-            right: -300px;
-        }
-
-        .sidebar.open.left {
-            transform: translateX(300px);
-        }
-
-        .sidebar.open.right {
-            transform: translateX(-300px);
-        }
-
-        .pull-tab {
-            position: absolute;
             top: 50%;
-            width: 100px;
-            height: 40px;
-            background: rgba(255, 0, 0, 0.8);
+            transform: translateY(-50%);
+            width: 40px;
+            height: 120px;
+            background: red;
+            border-radius: 5px 0 0 5px;
             cursor: pointer;
+            animation: pulse 2s infinite;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
-            border-radius: 0 5px 5px 0; /* Tab-like shape */
-            z-index: 4;
-            transform: translateY(-50%);
         }
 
-        .pull-tab.left {
-            left: 0;
-        }
-
-        .pull-tab.right {
+        .right-tab {
+            left: auto;
             right: 0;
-            border-radius: 5px 0 0 5px; /* Adjust for right side */
-        }
-
-        .pull-tab:hover {
-            animation: pulse 1s infinite;
+            border-radius: 0 5px 5px 0;
         }
 
         @keyframes pulse {
             0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+                box-shadow: 0 0 10px red;
             }
             50% {
-                box-shadow: 0 0 40px rgba(255, 0, 0, 1);
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
             }
         }
-
-        .pull-tab::after {
-            content: "⇨"; /* Add an arrow to the pull tab */
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .pull-tab.right::after {
-            content: "⇦"; /* Reverse arrow for right */
-        }
-
     </style>
 </head>
-
 <body>
-    <div id="particles-js"></div>
     <div class="background">
-        <div class="content">
-            <h1>Rami Jamal Aldine</h1>
-            <h2>Programming Portfolio</h2>
-            <p>This website showcases my journey into coding...</p>
-            <div class="button-container">
-                <button class="styled-button">About Me</button>
-                <button class="styled-button">JavaScript</button>
-                <button class="styled-button">My Apps</button>
-                <button class="styled-button">Final Project</button>
-            </div>
+        <h1 id="main-header">Rami Jamal Aldine</h1>
+        <h2>Programming Portfolio</h2>
+        <p>
+            This website showcases my journey into coding, starting with HTML and JavaScript. 
+            From creating basic structures to interactive designs, I’ve built this site to share my progress 
+            and inspire others to explore web development.
+        </p>
+        <!-- Button Navigation -->
+        <div class="button-container">
+            <button class="styled-button" onclick="window.location.href='AboutMe.html'">About Me</button>
+            <button class="styled-button" onclick="window.location.href='Javascripts.html'">JavaScript</button>
+            <button class="styled-button" onclick="window.location.href='myapps.html'">My Apps</button>
+            <button class="styled-button" onclick="window.location.href='final.html'">Final Project</button>
         </div>
     </div>
-
-    <div class="sidebar left" id="leftSidebar">
-        <h3>Skills</h3>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-        </ul>
-    </div>
-
-    <div class="sidebar right" id="rightSidebar">
-        <h3>About Me</h3>
-        <p>Hi! I'm a passionate developer...</p>
-    </div>
-
-    <div class="pull-tab left" onclick="toggleSidebar('left')"></div>
-    <div class="pull-tab right" onclick="toggleSidebar('right')"></div>
-
-    <script>
-        function toggleSidebar(side) {
-            const sidebar = document.getElementById(side + 'Sidebar');
-            sidebar.classList.toggle('open');
-        }
-
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 50 },
-                color: { value: ['#ffffff', '#ff0000'] }, /* White and red particles */
-                shape: { type: 'circle' },
-                opacity: { value: 0.6 },
-                size: { value: 10 },
-                move: { enable: true, speed: 3 }
-            }
-        });
-    </script>
 </body>
 </html>
